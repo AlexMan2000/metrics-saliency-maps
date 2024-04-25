@@ -93,6 +93,10 @@ class MultiStepMetric():
 
         with torch.no_grad():
 
+            # Input image (1, 1, 128, 128)
+            # Total pixel numbers: 128 x 128 = 16384
+
+            # print("explanation", explanations.shape)
             total_pixel_nb = explanations.shape[2]*explanations.shape[3]
             step_nb = min(self.max_step_nb,total_pixel_nb) if self.bound_max_step else total_pixel_nb
             pixel_removed_per_step = total_pixel_nb//step_nb
@@ -134,7 +138,11 @@ class MultiStepMetric():
                 #Computing perturbed images
                 data_masked_list = []
                 while left_pixel_nb > 0:
-
+                    # Non divisible problem solved here
+                    if left_pixel_nb < step_nb:
+                      k = pixel_removed_per_step * iter_nb + left_pixel_nb
+                    else:
+                      k = pixel_removed_per_step * (iter_nb + 1)
                     mask,saliency_scores = self.compute_mask(expl,data1.shape,pixel_removed_per_step*(iter_nb+1),pixel_removed_per_step)
                     mask = mask.to(data1.device)
                     data_masked = self.apply_mask(data1[i:i+1],data2[i:i+1],mask)
