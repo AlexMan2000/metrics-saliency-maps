@@ -37,7 +37,11 @@ class SingleStepMetric():
     def compute_scores(self,model,data,explanations,class_to_explain_list=None,data_to_replace_with=None,save_all_class_scores=False,return_data=False):
         
         with torch.no_grad():
-            
+
+            # Input image (1, 1, 128, 128)
+            # Total pixel numbers: 128 x 128 = 16384
+
+            # print("explanation", explanations.shape)
             masks = self.compute_mask(explanations,data.shape).to(data.device)
             if data_to_replace_with is None:
                 data_to_replace_with = self.get_masking_data(data)
