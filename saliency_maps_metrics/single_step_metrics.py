@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.functional as F
 import sys 
-from .data_replace import select_data_replace_method
+from  data_replace import select_data_replace_method
 
 def min_max_norm(arr):
 
