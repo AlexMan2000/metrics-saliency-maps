@@ -3,7 +3,7 @@ import sys
 import numpy as np
 import torch
 
-from .data_replace import select_data_replace_method
+from data_replace import select_data_replace_method
 
 def compute_correlation(score_var, all_sal_score_list):
     corr_list = []
