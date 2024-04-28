@@ -143,7 +143,7 @@ class MultiStepMetric():
                         k = pixel_removed_per_step * iter_nb + left_pixel_nb
                     else:
                         k = pixel_removed_per_step * (iter_nb + 1)
-                    mask,saliency_scores = self.compute_mask(expl,data1.shape,pixel_removed_per_step*(iter_nb+1),pixel_removed_per_step)
+                    mask,saliency_scores = self.compute_mask(expl,data1.shape,k,pixel_removed_per_step)
                     mask = mask.to(data1.device)
                     data_masked = self.apply_mask(data1[i:i+1],data2[i:i+1],mask)
                     data_masked_list.append(data_masked)
