@@ -87,7 +87,7 @@ class IIC_AD(SingleStepMetric):
         result_dic = self.compute_metric(score_list, score_masked_list)
         for metric_name in result_dic:
             result_dic[metric_name] = result_dic[metric_name].mean()
-        return result_dic
+        return result_dic, *list(result_dic.values())
 
     def compute_metric(self, score, score_masked):
         iic = (score_masked > score).astype("float")
@@ -104,7 +104,7 @@ class ADD(SingleStepMetric):
         result_dic = self.compute_metric(score_list, score_masked_list)
         for metric_name in result_dic:
             result_dic[metric_name] = result_dic[metric_name].mean()
-        return result_dic
+        return result_dic, *list(result_dic.values())
 
     def compute_metric(self, score, score_masked):
         add = ((score-score_masked)/score)
