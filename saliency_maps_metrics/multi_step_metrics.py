@@ -183,7 +183,7 @@ class MultiStepMetric():
         calibration_metric = self.compute_calibration_metric(all_score_list, all_sal_score_list)
         mean_auc_metric = auc_metric.mean()
         mean_calibration_metric = calibration_metric.mean()
-        return self.make_result_dic(mean_auc_metric,mean_calibration_metric)
+        return self.make_result_dic(mean_auc_metric,mean_calibration_metric), auc_metric, calibration_metric
 
 class Deletion(MultiStepMetric):
     def __init__(self,data_replace_method="black",bound_max_step=True,batch_size=20,max_step_nb=14*14,cumulative=True):
